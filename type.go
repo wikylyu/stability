@@ -4,12 +4,14 @@ import (
 	"time"
 
 	"github.com/wikylyu/stability/engine"
+	"github.com/wikylyu/stability/generation"
 	"github.com/wikylyu/stability/user"
 )
 
 type Session struct {
-	User   *user.UserClient
-	Engine *engine.EngineClient
+	User       *user.UserClient
+	Engine     *engine.EngineClient
+	Generation *generation.GenerationClient
 }
 
 type Config struct {

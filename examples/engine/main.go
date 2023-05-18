@@ -18,6 +18,6 @@ func main() {
 		panic(err)
 	}
 	for _, engine := range engines {
-		fmt.Printf("%s(%s)\n", engine.Name, engine.Type)
+		fmt.Printf("%s: %s(%s)\n", engine.ID, engine.Name, engine.Type)
 	}
 }
