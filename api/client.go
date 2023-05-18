@@ -175,6 +175,15 @@ func (c *Client) getFormRequest(method, path string, body interface{}) (*http.Re
 					}
 					io.Copy(part, value)
 				}
+			case []TextPrompt:
+				if len(value) > 0 {
+					for i, tp := range value {
+						fmt.Printf("%v:%v\n", tp.Text, tp.Weight)
+						writer.WriteField(fmt.Sprintf("%s[%d][text]", key, i), tp.Text)
+						writer.WriteField(fmt.Sprintf("%s[%d][weight]", key, i), fmt.Sprintf("%f", tp.Weight))
+					}
+				}
+
 			}
 
 		}
@@ -186,6 +195,7 @@ func (c *Client) getFormRequest(method, path string, body interface{}) (*http.Re
 	}
 	req.Header.Set("Content-Type", writer.FormDataContentType())
 	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apikey))
+
 	return req, nil
 }
 

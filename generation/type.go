@@ -1,6 +1,10 @@
 package generation
 
-import "github.com/wikylyu/stability/api"
+import (
+	"os"
+
+	"github.com/wikylyu/stability/api"
+)
 
 const (
 	ClipGuidancePresetNONE       = "NONE"
@@ -45,16 +49,16 @@ const (
 	StylePresetTile_Texture      = "tile-texture"
 )
 
-type TextPrompt struct {
-	Text   string  `json:"text"`
-	Weight float64 `json:"weight"`
-}
+// type TextPrompt struct {
+// 	Text   string  `json:"text"`
+// 	Weight float64 `json:"weight"`
+// }
 
 type Text2ImageRequest struct {
 	Width  int `json:"width,omitempty"`
 	Height int `json:"height,omitempty"`
 
-	TextPrompts []TextPrompt `json:"text_prompts"`
+	TextPrompts []api.TextPrompt `json:"text_prompts"`
 
 	CfgScale           float64 `json:"cfg_scale,omitempty"`
 	ClipGuidancePreset string  `json:"clip_guidance_preset,omitempty"`
@@ -79,4 +83,24 @@ type Text2ImageResponse struct {
 
 type GenerationClient struct {
 	c *api.Client
+}
+
+type Image2ImageRequest struct {
+	TextPrompts        []api.TextPrompt `form:"text_prompts"`
+	InitImage          *os.File         `form:"init_image"`
+	InitImageMode      string           `form:"init_image_mode"`
+	ImageStrength      float64          `form:"image_strength"`
+	CfgScale           float64          `form:"cfg_scale"`
+	ClipGuidancePreset string           `form:"clip_guidance_preset"`
+	Sampler            string           `form:"sampler"`
+	Samples            int              `form:"samples"`
+	Seed               int64            `form:"seed"`
+	Steps              int              `form:"steps"`
+	StylePreset        string           `form:"style_preset"`
+
+	Extras interface{} `form:"extras"`
+}
+
+type Image2ImageResponse struct {
+	Artifacts []Image `json:"artifacts"`
 }

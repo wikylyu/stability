@@ -81,6 +81,6 @@ func main() {
   - [x] list
 - [ ] generation
   - [x] text-to-image
-  - [ ] image-to-image
+  - [x] image-to-image
   - [ ] image-to-image/upscale
   - [ ] image-to-image/masking
