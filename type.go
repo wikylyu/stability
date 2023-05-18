@@ -3,11 +3,13 @@ package stability
 import (
 	"time"
 
+	"github.com/wikylyu/stability/engine"
 	"github.com/wikylyu/stability/user"
 )
 
 type Session struct {
-	User *user.UserClient
+	User   *user.UserClient
+	Engine *engine.EngineClient
 }
 
 type Config struct {

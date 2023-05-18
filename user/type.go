@@ -16,6 +16,10 @@ type User struct {
 	Organizations  []Organization `json:"organizations"`
 }
 
+type Blance struct {
+	Credits float64 `json:"credits"`
+}
+
 type UserClient struct {
 	c *api.Client
 }

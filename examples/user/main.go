@@ -22,4 +22,10 @@ func main() {
 	for _, org := range user.Organizations {
 		fmt.Printf("\t Org Name: %s\n", org.Name)
 	}
+
+	balance, err := ai.User.GetBalance()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("Credits: %f\n", balance.Credits)
 }
