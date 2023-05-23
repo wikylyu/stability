@@ -1,7 +1,10 @@
 package generation
 
 import (
+	"encoding/base64"
+	"image"
 	"os"
+	"strings"
 
 	"github.com/wikylyu/stability/api"
 )
@@ -75,6 +78,11 @@ type Image struct {
 	Base64       string `json:"base64"`
 	FinishReason string `json:"finishReason"`
 	Seed         int64  `json:"seed"`
+}
+
+func (img *Image) ToImage() (image.Image, string, error) {
+	reader := base64.NewDecoder(base64.StdEncoding, strings.NewReader(img.Base64))
+	return image.Decode(reader)
 }
 
 type Text2ImageResponse struct {
